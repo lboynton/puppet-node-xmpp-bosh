@@ -3,5 +3,6 @@ class bosh {
     package { 'node-xmpp-bosh':
         ensure   => present,
         provider => 'npm',
+        require  => Class['nodejs'],
     }
 }
