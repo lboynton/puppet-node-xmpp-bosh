@@ -1,6 +1,7 @@
 class bosh {
     include nodejs
-    package {'expat-devel':
+    $deps = ['expat-devel', 'zlib-devel']
+    package {$deps:
         ensure => present,
     }
     package { 'node-xmpp-bosh':
@@ -8,7 +9,7 @@ class bosh {
         provider => 'npm',
         require  => [
             Class['nodejs'],
-            Package['expat-devel'],
+            Package[$deps],
         ]
     }
 }
