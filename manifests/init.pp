@@ -8,6 +8,9 @@ class bosh {
     package { 'node-gyp':
         ensure   => present,
         provider => 'npm',
+        require  => [
+            Class['nodejs'],
+        ]
     }
     package { 'node-xmpp-bosh':
         ensure   => present,
