@@ -8,7 +8,8 @@ class bosh {
     # nobody user due to error with node-gyp. This will hopefully be fixed
     # when a newer version of node-gyp is used.
     exec { '/usr/bin/sudo /usr/bin/npm config set unsafe-perm true':
-        alias => 'npm-unsafe-perm',
+        alias     => 'npm-unsafe-perm',
+        logoutput => true,
     }
     package { 'node-xmpp-bosh':
         ensure   => present,
