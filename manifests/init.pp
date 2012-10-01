@@ -52,6 +52,13 @@ class bosh {
         before  => Service['bosh'],
         require => User['bosh'],
     }
+    file { '/var/run/bosh':
+        ensure  => directory,
+        owner   => 'bosh',
+        group   => 'bosh',
+        before  => Service['bosh'],
+        require => User['bosh'],
+    }
     service { 'bosh':
         ensure   => running,
         enable   => true,
