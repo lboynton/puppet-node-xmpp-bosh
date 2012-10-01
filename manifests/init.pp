@@ -20,4 +20,21 @@ class bosh {
             Exec['npm-unsafe-perm'],
         ]
     }
+    file { '/etc/bosh.js.conf':
+        ensure => present,
+        source => 'puppet:///files/node-xmpp-bosh/bosh.js',
+        before => Service['bosh'],
+    }
+    file { '/etc/init.d/bosh':
+        ensure => present,
+        source => 'puppet:///files/node-xmpp-bosh/bosh-init',
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0755',
+        before => Service['bosh'],
+    }
+    service { 'bosh':
+        ensure   => running,
+        enable   => true,
+    }
 }
