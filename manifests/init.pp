@@ -1,6 +1,6 @@
 class bosh {
     include nodejs
-    $deps = ['expat-devel', 'zlib-devel']
+    $deps = ['expat-devel', 'zlib-devel', 'make']
     package {$deps:
         ensure => present,
     }
