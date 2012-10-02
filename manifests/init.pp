@@ -63,5 +63,6 @@ class bosh {
     service { 'bosh':
         ensure   => running,
         enable   => true,
+        require  => Package['node-xmpp-bosh'],
     }
 }
