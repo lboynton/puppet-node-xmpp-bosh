@@ -10,7 +10,7 @@ class bosh {
     exec { '/usr/bin/npm config set unsafe-perm true':
         alias     => 'npm-unsafe-perm',
         logoutput => true,
-        Package['npm'],
+        require   => Package['npm'],
     }
     package { 'node-xmpp-bosh':
         ensure   => present,
