@@ -1,4 +1,6 @@
-class bosh {
+class bosh(
+    $system_info_password = '' # default of empty password disables sysinfo area
+) {
     include nodejs
     $deps = ['expat-devel', 'zlib-devel', 'make']
     package {$deps:
@@ -17,9 +19,9 @@ class bosh {
         system => true,
     }
     file { '/etc/bosh.js.conf':
-        ensure => present,
-        source => 'puppet:///modules/bosh/bosh.conf.js',
-        before => Service['bosh'],
+        ensure  => present,
+        content => template('bosh/bosh.conf.js.erb'),
+        before  => Service['bosh'],
     }
     file { '/etc/init.d/bosh':
         ensure => present,
