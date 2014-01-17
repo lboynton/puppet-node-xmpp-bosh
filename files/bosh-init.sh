@@ -49,8 +49,11 @@ case "$1" in
         $0 stop
         $0 start
     ;;
+    status)
+        status -p $PID_FILE
+    ;;
     *)
-        echo "Usage: $0 {start|stop|restart}" >&2
+        echo "Usage: $0 {start|stop|status|restart}" >&2
         exit 1
     ;;
 esac
