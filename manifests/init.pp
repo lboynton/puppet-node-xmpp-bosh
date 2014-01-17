@@ -4,22 +4,13 @@ class bosh {
     package {$deps:
         ensure => present,
     }
-    # Tell npm to install packages as root user instead of dropping to the
-    # nobody user due to error with node-gyp. This will hopefully be fixed
-    # when a newer version of node-gyp is used.
-    exec { '/usr/bin/npm config set unsafe-perm true':
-        alias     => 'npm-unsafe-perm',
-        logoutput => true,
-        require   => Package['npm'],
-    }
     package { 'node-xmpp-bosh':
         ensure   => present,
         provider => 'npm',
         require  => [
             Class['nodejs'],
             Package[$deps],
-            Exec['npm-unsafe-perm'],
-        ]
+        ],
     }
     user { 'bosh':
         ensure => present,
