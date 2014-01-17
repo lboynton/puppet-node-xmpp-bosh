@@ -22,30 +22,34 @@ test -e $BOSH || exit 0
 
 start()
 {
+    echo -n "Starting bosh server"
     if ! pgrep -f $NAME
     then
         export NODE_PATH
     fi
     daemon --user=bosh --pidfile=$PID_FILE $BOSH
+    echo
     return $?
 }
 
 stop()
 {
+    echo -n "Stopping bosh server"
     killproc -p $PID_FILE $BOSH
+    retval=$?
+    echo
+    [ $retval -eq 0 ] && rm -f $lockfile
+    return $retval
 }
 
 case "$1" in
     start)
-        echo -n "Starting bosh server"
         start
     ;;
     stop)
-        echo -n "Stopping bosh server"
         stop
     ;;
     restart)
-        echo -n "Restarting bosh server"
         $0 stop
         $0 start
     ;;
@@ -57,11 +61,4 @@ case "$1" in
         exit 1
     ;;
 esac
-
-if [ $? -eq 0 ]; then
-    echo .
-else
-    echo " failed."
-fi
-
-exit 0
+exit $?
