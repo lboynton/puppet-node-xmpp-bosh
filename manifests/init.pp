@@ -18,12 +18,12 @@ class bosh {
     }
     file { '/etc/bosh.js.conf':
         ensure => present,
-        source => 'puppet:///modules/bosh/bosh.js',
+        source => 'puppet:///modules/bosh/bosh.conf.js',
         before => Service['bosh'],
     }
     file { '/etc/init.d/bosh':
         ensure => present,
-        source => 'puppet:///modules/bosh/bosh-init',
+        source => 'puppet:///modules/bosh/bosh-init.sh',
         owner  => 'root',
         group  => 'root',
         mode   => '0755',
@@ -31,7 +31,7 @@ class bosh {
     }
     file { '/usr/local/bin/start-bosh':
         ensure => present,
-        source => 'puppet:///modules/bosh/start-bosh',
+        source => 'puppet:///modules/bosh/start-bosh.sh',
         owner  => 'root',
         group  => 'root',
         mode   => '0755',
