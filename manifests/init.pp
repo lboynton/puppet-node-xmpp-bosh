@@ -1,5 +1,6 @@
 class bosh(
-    $system_info_password = '' # default of empty password disables sysinfo area
+    $route_filter           = '/.*/',   # default allows all routes
+    $system_info_password   = ''        # default of empty password disables sysinfo area
 ) {
     include epel
     include nodejs
