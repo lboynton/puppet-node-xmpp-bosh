@@ -1,9 +1,14 @@
 class bosh(
     $system_info_password = '' # default of empty password disables sysinfo area
 ) {
+    include epel
     include nodejs
+
+    Class['epel'] -> Class['nodejs']
+
     $deps = ['expat-devel', 'zlib-devel', 'make']
-    package {$deps:
+
+    package { $deps:
         ensure => present,
     }
     package { 'node-xmpp-bosh':
