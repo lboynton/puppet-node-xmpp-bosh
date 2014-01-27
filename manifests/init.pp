@@ -1,4 +1,5 @@
 class bosh(
+    $logging                = 'FATAL',  # default log level. Valid options are ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF
     $route_filter           = '/.*/',   # default allows all routes
     $system_info_password   = ''        # default of empty password disables sysinfo area
 ) {
